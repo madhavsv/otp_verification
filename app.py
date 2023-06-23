@@ -21,11 +21,12 @@ def verify_otp():
 
     if username == 'verify' and password == '12345':   
         account_sid = 'AC852674210efdfec32df17e6f947be085'
-        auth_token = 'd48f018394dc176362d404a614c5167c'
+        auth_token = '9b884f4cffe5d46b82f716ebd300fb3e'
         client = Client(account_sid, auth_token)
+        print("mobile- ",mobile_number)
 
         verification = client.verify \
-            .services('MGc3296d139ab5d6ee050c8e54f7bc2ade') \
+            .services('VA45846f0b922381de9d23465aff30894f') \
             .verifications \
             .create(to=mobile_number, channel='sms')
 
@@ -43,20 +44,21 @@ def get_otp():
     received_otp = request.form['received_otp']
     mobile_number = request.form['number']
 
-    account_sid = 'Enter your account_sid here'
-    auth_token = 'Enter your auth_token here'
+    account_sid = 'AC852674210efdfec32df17e6f947be085'
+    auth_token = '9b884f4cffe5d46b82f716ebd300fb3e'
     client = Client(account_sid, auth_token)
                                             
     verification_check = client.verify \
-        .services('Enter your Service SID here') \
+        .services('VA45846f0b922381de9d23465aff30894f') \
         .verification_checks \
         .create(to=mobile_number, code=received_otp)
     print(verification_check.status)
 
     if verification_check.status == "pending":
-        return render_template('Pass otp_verify html page here')    # Write code here
+        return render_template('otp_error.html')    # Write code here
     else:
         return redirect("https://project-c272.onrender.com/")
+
 
 
 if __name__ == "__main__":
